@@ -13,8 +13,8 @@ const mongoose = require("mongoose")
 
 app.use('/', route);
 
-mongoose.connect("mongodb+srv://monty-python:SnYUEY4giV9rekw@functionup-backend-coho.0zpfv.mongodb.net/Sourav_db?retryWrites=true&w=majority" )
-    .then(() => console.log('mongodb Rock n Roll on 27017'))
+mongoose.connect("mongodb+srv://rubygupta7505:GDDYMfHDEGehjUj0@cluster0.xf64f.mongodb.net/Project5" )
+    .then(() => console.log('mongodb is connected'))
     .catch(err => console.log(err))
 
 
