@@ -7,7 +7,7 @@ const userAuth = async(req, res, next) => {
           return res
             .status(400)
             .json({ status: false, msg: " token is not preesnt" });
-    
+     
         let splitToken = token.split(' ')
     
         let decodeToken = jwt.decode(splitToken[1], 'Group-38')

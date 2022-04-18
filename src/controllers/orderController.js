@@ -2,7 +2,7 @@ const validator = require("../utils/validator");
 const userModel = require("../models/userModel");
 const cartModel = require("../models/cartModel");
 const orderModel = require("../models/orderModel");
-
+ 
 const orderCreation = async (req, res) => {
     try {
         const userId = req.params.userId;
