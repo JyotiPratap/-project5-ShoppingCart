@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController')
 const productController = require('../controllers/productController')
 const cartController = require('../controllers/cartController')
+const orderController = require('../controllers/orderController')
 const middleware = require('../middlewares/auth')
 
 //User's APIs -> Authentication required.
@@ -20,8 +21,11 @@ router.delete('/products/:productId', productController.deleteProduct)
 
 //Cart's APIs -> Authentication required.
 router.post('/users/:userId/cart', middleware.userAuth, cartController.cartCreation)
-router.put(" /users/:userId/cart", middleware.userAuth, cartController.updateCart)
+router.put("/users/:userId/cart", middleware.userAuth, cartController.updateCart)
 router.get('/users/:userId/cart',middleware.userAuth,cartController.getCart)
 router.delete('/users/:userId/cart',middleware.userAuth,cartController.deleteCart)
 
+//Cart's APIs -> Authentication required.
+router.post('/users/:userId/orders', middleware.userAuth, orderController.orderCreation)
+router.put("/users/:userId/orders", middleware.userAuth, orderController.updateOrder)
 module.exports = router;

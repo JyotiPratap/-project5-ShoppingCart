@@ -67,7 +67,7 @@ const cartCreation = async function (req, res) {
 
             //updating quantity.
             for (i in itemsArr) {
-                if (itemsArr[i].productId.toString() === productId) {
+                if (itemsArr[i].productId=== productId) {
                     itemsArr[i].quantity += quantity
 
                     let updatedCart = { items: itemsArr, totalPrice: price, totalItems: itemsArr.length }
@@ -88,6 +88,82 @@ const cartCreation = async function (req, res) {
         res.status(500).send({ status: false, data: err.message });
     }
 }
+
+
+
+// const cartCreation = async function(req, res) {
+//     let userId = req.params.userId
+//     let items2 
+//     if(!(validator.isValid(userId))&&(validator.isValidObjectId(userId))){
+//         return res.status(400).send({status:false, message:"Please provide a valid userId"})
+//     }
+//     if (req.userId != req.params.userId)
+//        return res.status(401).json({ status: false, msg: "Authorised user to create cart" });
+  
+//      let items = req.body.items
+//      let userId2 =req.body.userId
+//      const isCartExist = await cartModel.findOne({userId:userId})
+//     /// res.send(isCartExist)
+//      let totalPrice = 0;
+//      if(!isCartExist){
+//         for(let i = 0; i < items.length; i++){
+//           let productId = items[i].productId
+//           let quantity = items[i].quantity
+//            let findProduct = await productModel.findById(productId)
+//            totalPrice = totalPrice + (findProduct.price*quantity)
+//          }
+//         // if (req.userId != req.params.userId) { return res.status(400).send({ status: false, msg: "pathparam userId and body userId is diffrent" }) }
+         
+//         let createCart = await cartModel.create({userId:userId2,items:items,totalPrice:totalPrice,totalItems:items.length })
+//          items2 = createCart.items
+//         return res.status(200).send({status:true,data:createCart})
+//      } if(isCartExist){
+//           items2 = isCartExist.items
+//      }
+//         let findProduct = await productModel.findById(items[0].productId)
+//          console.log(findProduct.price)
+//        // res.send(findProduct)
+//         let totalPrice2 = findProduct.price
+//         let newquantity = items[0].quantity
+//         let flage = 0
+        
+//            for(let i = 0; i < items2.length; i++){
+//                let productId = items2[i].productId
+//             if(productId == items[0].productId){
+//                    flage = 1
+//                    items2[i].quantity = items2[i].quantity + newquantity}
+               
+  
+//    }    totalPrice2 = totalPrice2 + isCartExist.totalPrice
+//         if(flage == 0){
+//             items2.push(items[0])
+//         }
+//        let updateCart = await cartModel.findOneAndUpdate({userId:userId2},{$set:{items:items2,totalPrice:totalPrice2,totalItems:items2.length}},{new:true})
+//                return res.send(updateCart)
+   
+   
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //update cart.
 const updateCart = async function (req, res) {
