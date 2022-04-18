@@ -8,7 +8,7 @@ const middleware = require('../middlewares/auth')
 //User's APIs -> Authentication required.
 router.post('/register', userController.createUSer)
 router.post('/login', userController.login)
-router.get('/user/:userId/profile', userController.getUserProfile)
+router.get('/user/:userId/profile',middleware.userAuth,userController.getUserProfile)
 router.put('/user/:userId/profile',middleware.userAuth,userController.updateProfile)
 
 //Product's APIs -> No Authentication required.
@@ -20,5 +20,8 @@ router.delete('/products/:productId', productController.deleteProduct)
 
 //Cart's APIs -> Authentication required.
 router.post('/users/:userId/cart', middleware.userAuth, cartController.cartCreation)
+router.put(" /users/:userId/cart", middleware.userAuth, cartController.updateCart)
+router.get('/users/:userId/cart',middleware.userAuth,cartController.getCart)
+router.delete('/users/:userId/cart',middleware.userAuth,cartController.deleteCart)
 
 module.exports = router;

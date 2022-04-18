@@ -63,10 +63,8 @@ const createProduct = async function (req, res) {
             }
         }
 
-        if (isFreeShipping) {
-            if (!(isFreeShipping != true)) {
-                return res.status(400).send({ status: false, message: "isFreeShipping must be a boolean value" })
-            }
+        if (!(isFreeShipping == "true")) {
+            return res.status(400).send({ status: false, message: "isFreeShipping must be a boolean value" })
         }
 
         if (!(productImage && productImage.length > 0)) {
