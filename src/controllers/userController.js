@@ -174,11 +174,20 @@ const login = async (req, res) => {
 const getUserProfile = async function (req, res) {
   try {
     let userId = req.params.userId
-
+    let userIdFromToken = req.userId;
+    
     if (!validator.isValid(userId)) {
       return res.status(400).send({ status: false, msg: "userId required" })
-
     }
+    const findUser = await userModel.findById({ _id: userId })
+        if (!findUser) {
+            return res.status(400).send({ status: false, message: `User doesn't exist by ${userId}` })
+        }
+        //Authentication & authorization
+        if (findUser._id.toString() != userIdFromToken) {
+            return res.status(401).send({ status: false, message: `Unauthorized access! User's info doesn't match` });
+        }
+
     if (!validator.isValidObjectId(userId)) {
       return res.status(400).send({ status: false, msg: "userId invalid" })
     }
@@ -209,11 +218,21 @@ const getUserProfile = async function (req, res) {
 const updateProfile = async (req, res) => {
     try {
         const userId = req.params.userId
+        let userIdFromToken = req.userId;
         if (!validator.isValid(userId)) {
             return res.status(400).send({ status: false, msg: "userId is required" })
         }
         if (!validator.isValidObjectId(userId)) {
             return res.status(400).send({ status: false, msg: "userId is invalid" })
+        }
+        const findUser = await userModel.findById({ _id: userId })
+        if (!findUser) {
+            return res.status(400).send({ status: false, message: `User doesn't exist by ${userId}` })
+        }
+
+        //Authentication & authorization
+        if (findUser._id.toString() != userIdFromToken) {
+            return res.status(401).send({ status: false, message: `Unauthorized access! User's info doesn't match` });
         }
         let { fname, lname, email, phone, password, address } = req.body
         const dataObject = {};
