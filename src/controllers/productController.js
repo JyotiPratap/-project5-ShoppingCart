@@ -230,6 +230,16 @@ const updateProduct = async function (req, res) {
             var uploadedFileURL = await aws.uploadFile(files[0]); // expect this function to take file as input and give url of uploaded file as output 
             //   res.status(201).send({ status: true, data: uploadedFileURL });
         }
+
+        if (availableSizes) {
+            let sizesArray = availableSizes.split(",").map(x => x.trim())
+
+            for (let i = 0; i < sizesArray.length; i++) {
+                if (!(["S", "XS", "M", "X", "L", "XXL", "XL"].includes(sizesArray[i]))) {
+                    return res.status(400).send({ status: false, message: "AvailableSizes should be among ['S','XS','M','X','L','XXL','XL']" })
+                }
+            }
+        }
         const ProductData = {
             title: title, description: description, price: price, currencyId: "₹", currencyFormat: "INR",
             isFreeShipping: isFreeShipping, productImage: uploadedFileURL,
